@@ -7,4 +7,62 @@ description: >-
 
 # Verify a contract from a foundry project
 
+### On Blockscout
+
+```bash
+forge verify-contract  --verifier blockscout --verifier-url 'https://filecoin-testnet.blockscout.com/api/' --force --skip-is-verified-check 0xYourContractAddress  src/MyContract.sol:MyContract
+```
+
+```bash
+forge verify-contract  --verifier blockscout --verifier-url 'https://filecoin.blockscout.com/api/' --force --skip-is-verified-check 0xYourContractAddress  src/MyContract.sol:MyContract
+```
+
+### On Sourcify
+
+For Filecoin Mainnet verification on sourcify
+
+```bash
+forge verify-contract 0xYourContractAddress \
+  src/MyToken.sol:MyToken \
+  --chain-id 314 \
+  --verifier sourcify
+  --verifier-url https://sourcify.dev/server/
+```
+
+For Filecoin Calibration Testnet verification on sourcify
+
+```bash
+forge verify-contract 0xYourContractAddress \
+  src/MyToken.sol:MyToken \
+  --chain-id 314159 \
+  --verifier sourcify
+  --verifier-url https://sourcify.dev/server/
+```
+
+### On Filfox
+
+#### As a Global CLI Tool
+
+`npm i -g @fil-b/filfox-verifier`
+
+include into your hardhat config
+
+#### Usage
+
+```bash
+filfox-verifier forge <address> <contract-path> --chain <chainId>
+```
+
+#### Example:
+
+```bash
+# Verify contract on Filecoin mainnet
+filfox-verifier forge 0xYourContractAddress src/MyContract.sol:MyContract --chain 314
+```
+
+```bash
+# Verify contract on Calibration testnet
+filfox-verifier forge 0xYourContractAddress src/MyContract.sol:MyContract --chain 314159
+```
+
 [Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/programmatically/foundry)
