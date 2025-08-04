@@ -1,30 +1,34 @@
 ---
 description: >-
-  This section contains a wealth of information specifically about ways to verify
-  smart contracts on the Filecoin network.
+  This section provides comprehensive guides for verifying smart contracts
+  on the Filecoin network using various tools and methods.
 ---
 
-# Verify a contract
+# Contract Verification
 
-## Verification tools
+Contract verification is essential for transparency and trust in the Filecoin ecosystem. It allows users to inspect the source code of deployed contracts and ensures they function as intended.
 
-The following FEVM-compatible chain explorers offer contract verification tools. For more information, click the appropriate link below.
+## Available Verification Tools
 
-- [Filfox](https://filfox.info/en/contract)
-- [Blockscout](https://filecoin.blockscout.com/)
-- [Starboard](https://fvm.starboard.ventures/explorer/verifier)
-- [Beryx](https://beryx.zondax.ch/contract_verifier)
+The following FEVM-compatible chain explorers offer contract verification capabilities:
 
-# Contract Verification Guides
+- [Filfox](https://filfox.info/en/contract) - Native Filecoin explorer with comprehensive verification features
+- [Blockscout](https://filecoin.blockscout.com/) - Multi-chain explorer with advanced verification options
+- [Starboard](https://fvm.starboard.ventures/explorer/verifier) - FVM-focused verification platform
+- [Beryx](https://beryx.zondax.ch/contract_verifier) - Developer-friendly verification interface
 
-This section covers various ways to verify your smart contracts in the Filecoin Virtual Machine. There are two ways to verify a contract:
+## Verification Methods
 
-- Programmatic contract verification
-  - How to verify a contract using [hardhat](/smart-contracts/developing-contracts/verify-a-contract/programatic/hardhat.md)
-  - How to verify a contract using [Foundry](/smart-contracts/developing-contracts/verify-a-contract/programatic/foundry.md)
-- Verifying a contract from the explorer user interface
+There are two primary approaches to verify your smart contracts:
 
-  - How to verify a contract using the [Filfox](/smart-contracts/developing-contracts/verify-a-contract/explorer-interface/filfox.md) explorer user interface
-  - How to verify a contract using the [Blockscout](/smart-contracts/developing-contracts/verify-a-contract/explorer-interface/blockscout.md) explorer user interface
+### Programmatic Verification
+Automate contract verification directly from your development environment:
+- [Hardhat verification guide](/smart-contracts/developing-contracts/verify-a-contract/programmatic/hardhat.md)
+- [Foundry verification guide](/smart-contracts/developing-contracts/verify-a-contract/programmatic/foundry.md)
+
+### Web Interface Verification
+Verify contracts through explorer user interfaces:
+- [Filfox web interface guide](/smart-contracts/developing-contracts/verify-a-contract/web-interface/filfox.md)
+- [Blockscout web interface guide](/smart-contracts/developing-contracts/verify-a-contract/web-interface/blockscout.md)
 
 [Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract)
