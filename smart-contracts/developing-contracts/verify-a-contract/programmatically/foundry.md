@@ -5,6 +5,10 @@ description: >-
   using foundry.
 ---
 
+Before deeping into the details on how to verify your contracts using Foundry.
+
+Make sure if you don't have your Foundry project in place to check out the [FEVM-Foundry-kit](/smart-contracts/developing-contracts/foundry.md)
+
 # Verify a contract from a foundry project
 
 ### On Blockscout
@@ -39,6 +43,8 @@ forge verify-contract 0xYourContractAddress \
   --verifier-url https://sourcify.dev/server/
 ```
 
+For more info check out the Sourcify [docs](https://docs.sourcify.dev/docs/how-to-verify/)
+
 ### On Filfox
 
 #### As a Global CLI Tool
@@ -64,5 +70,7 @@ filfox-verifier forge 0xYourContractAddress src/MyContract.sol:MyContract --chai
 # Verify contract on Calibration testnet
 filfox-verifier forge 0xYourContractAddress src/MyContract.sol:MyContract --chain 314159
 ```
+
+For more info check this package [docs](https://www.npmjs.com/package/@fil-b/filfox-verifier)
 
 [Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/programmatically/foundry)

@@ -5,6 +5,10 @@ description: >-
   using hardhat.
 ---
 
+Before deeping into the details on how to verify your contracts using Hardhat.
+
+Make sure if you don't have your Hardhat project in place to check out the [FEVM-Hardhat-kit](/smart-contracts/developing-contracts/hardhat.md)
+
 # Verify a contract from a hardhat project
 
 ### On Blockscout
@@ -92,6 +96,8 @@ export default config;
 
 This will enable by default to also verify on sourcify while running the `npx hardhat verify` task
 
+For more info check out the Sourcify [docs](https://docs.sourcify.dev/docs/how-to-verify/)
+
 ### On Filfox
 
 `npm i -g @fil-b/filfox-verifier`
@@ -117,5 +123,7 @@ npx hardhat verifyfilfox --address 0xYourContractAddress --network filecoin
 # For Calibration testnet
 npx hardhat verifyfilfox --address 0xYourContractAddress --network calibration
 ```
+
+For more info check this package [docs](https://www.npmjs.com/package/@fil-b/filfox-verifier)
 
 [Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/programmatically/hardhat)
