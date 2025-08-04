@@ -51,8 +51,6 @@ The following guide walks you through the process of contract verification using
 Success! Your contract is now verified. Blockscout will redirect you to your verfied contract dashboard!
 ```
 
-!\[]\(../../.gitbook/assets/smart-contracts-developing-contracts-verify-a-contract-verify-and -publish.jpg)
-
 ![](../../../../.gitbook/assets/smart-contracts-developing-contracts-verify-a-contract-success-blockscout.jpg)
 
 [Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract)
