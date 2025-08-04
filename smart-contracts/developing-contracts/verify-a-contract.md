@@ -4,7 +4,18 @@ description: >-
   smart contracts on the Filecoin network.
 ---
 
-# Contract Verification tools
+# Verify a contract
+
+## Verification tools
+
+The following FEVM-compatible chain explorers offer contract verification tools. For more information, click the appropriate link below.
+
+- [Filfox](https://filfox.info/en/contract)
+- [Blockscout](https://filecoin.blockscout.com/)
+- [Starboard](https://fvm.starboard.ventures/explorer/verifier)
+- [Beryx](https://beryx.zondax.ch/contract_verifier)
+
+# Contract Verification Guides
 
 This section covers various ways to verify your smart contracts in the Filecoin Virtual Machine. There are two ways to verify a contract:
 

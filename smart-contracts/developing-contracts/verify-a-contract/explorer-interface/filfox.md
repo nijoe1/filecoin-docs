@@ -5,16 +5,6 @@ description: >-
   using Filfox.
 ---
 
-# Verify a contract
-
-## Verification tools
-
-The following FEVM-compatible chain explorers offer contract verification tools. For more information, click the appropriate link below.
-
-- [Filfox](https://filfox.info/en/contract)
-- [Starboard](https://fvm.starboard.ventures/explorer/verifier)
-- [Beryx](https://beryx.zondax.ch/contract_verifier)
-
 ## Verification tutorial with Filfox
 
 The following guide walks you through the process of contract verification using the [Filfox](https://filfox.info/en/contract) explorer.
