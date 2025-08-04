@@ -12,4 +12,4 @@ This section covers guides on how to verify your smart contracts in the Filecoin
 - How to verify a contract using [Filfox](/smart-contracts/developing-contracts/verify-a-contract/explorer-interface/filfox.md)
 - How to verify a contract using [Blockscout](/smart-contracts/developing-contracts/verify-a-contract/explorer-interface/blockscout.md)
 
-[Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/programmatic)
+[Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/explorer-interface)
