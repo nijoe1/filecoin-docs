@@ -22,6 +22,7 @@ This guide shows you how to verify your smart contracts using Foundry on the Fil
 Blockscout is a popular blockchain explorer that supports contract verification.
 
 **Verify on Calibration Testnet:**
+
 ```bash
 forge verify-contract \
   --verifier blockscout \
@@ -33,12 +34,14 @@ forge verify-contract \
 ```
 
 **Verify on Filecoin Mainnet:**
+
 ```bash
 forge verify-contract \
   --verifier blockscout \
   --verifier-url 'https://filecoin.blockscout.com/api/' \
   --force \
   --skip-is-verified-check \
+  --guess-constructor-args \
   0xYourContractAddress \
   src/MyContract.sol:MyContract
 ```
@@ -48,21 +51,25 @@ forge verify-contract \
 Sourceify provides decentralized contract verification.
 
 **Verify on Filecoin Mainnet:**
+
 ```bash
 forge verify-contract 0xYourContractAddress \
   src/MyToken.sol:MyToken \
   --chain-id 314 \
   --verifier sourcify \
-  --verifier-url https://sourcify.dev/server/
+  --verifier-url https://sourcify.dev/server/ \
+  --guess-constructor-args
 ```
 
 **Verify on Calibration Testnet:**
+
 ```bash
 forge verify-contract 0xYourContractAddress \
   src/MyToken.sol:MyToken \
   --chain-id 314159 \
   --verifier sourcify \
-  --verifier-url https://sourcify.dev/server/
+  --verifier-url https://sourcify.dev/server/ \
+  --guess-constructor-args
 ```
 
 For more information, see the [Sourcify documentation](https://docs.sourcify.dev/docs/how-to-verify/).
@@ -72,11 +79,13 @@ For more information, see the [Sourcify documentation](https://docs.sourcify.dev
 Filfox is the native Filecoin explorer with dedicated verification support.
 
 **Installation:**
+
 ```bash
 npm install -g @fil-b/filfox-verifier
 ```
 
 **Usage:**
+
 ```bash
 filfox-verifier forge <address> <contract-path> --chain <chainId>
 ```
@@ -93,4 +102,4 @@ filfox-verifier forge 0xYourContractAddress src/MyContract.sol:MyContract --chai
 
 For detailed information, see the [@fil-b/filfox-verifier documentation](https://www.npmjs.com/package/@fil-b/filfox-verifier).
 
-[Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/programmatically/foundry)
+[Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/programmatic/foundry)

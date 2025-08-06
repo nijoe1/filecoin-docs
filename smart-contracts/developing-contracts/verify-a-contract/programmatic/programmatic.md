@@ -8,13 +8,6 @@ description: >-
 
 Programmatic verification allows you to automate the contract verification process directly from your development environment. This approach is ideal for CI/CD pipelines and streamlined deployment workflows.
 
-## Benefits of Programmatic Verification
-
-- **Automation**: Integrate verification into your deployment scripts
-- **Consistency**: Ensure all contracts are verified using the same process
-- **Efficiency**: Verify multiple contracts with a single command
-- **Version Control**: Keep verification configuration in your repository
-
 ## Available Tools
 
 Choose your preferred development framework:
@@ -22,4 +15,4 @@ Choose your preferred development framework:
 - **[Hardhat](/smart-contracts/developing-contracts/verify-a-contract/programmatic/hardhat.md)** - Popular Ethereum development environment with extensive plugin ecosystem
 - **[Foundry](/smart-contracts/developing-contracts/verify-a-contract/programmatic/foundry.md)** - Fast, portable, and modular toolkit for Ethereum application development
 
-[Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/programmatically)
+[Was this page helpful?](https://airtable.com/apppq4inOe4gmSSlk/pagoZHC2i1iqgphgl/form?prefill_Page+URL=https://docs.filecoin.io/smart-contracts/developing-contracts/verify-a-contract/programmatic)

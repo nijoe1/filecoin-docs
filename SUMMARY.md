@@ -133,7 +133,7 @@
   - [Direct deal-making with Client contract](smart-contracts/developing-contracts/client-contract-tutorial.md)
   - [Using RaaS](smart-contracts/developing-contracts/using-raas.md)
   - [Verify a contract](smart-contracts/developing-contracts/verify-a-contract.md)
-    - [Programmatic](smart-contracts/developing-contracts/verify-a-contract/programmatic/programmatically.md)
+    - [Programmatic](smart-contracts/developing-contracts/verify-a-contract/programmatic/programmatic.md)
       - [Hardhat](smart-contracts/developing-contracts/verify-a-contract/programmatic/hardhat.md)
       - [Foundry](smart-contracts/developing-contracts/verify-a-contract/programmatic/foundry.md)
     - [Web Interface](smart-contracts/developing-contracts/verify-a-contract/web-interface/explorer-interface.md)
