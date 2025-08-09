@@ -41,7 +41,6 @@ forge verify-contract \
   --verifier-url 'https://filecoin.blockscout.com/api/' \
   --force \
   --skip-is-verified-check \
-  --guess-constructor-args \
   0xYourContractAddress \
   src/MyContract.sol:MyContract
 ```

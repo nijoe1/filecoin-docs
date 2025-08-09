@@ -109,12 +109,14 @@ For more information, see the [Sourcify documentation](https://docs.sourcify.dev
 Filfox is the native Filecoin explorer with dedicated verification support.
 
 **Installation:**
+
+Install the `@fil-b/filfox-verifier` package into your Hardhat project.
 ```bash
 npm install -g @fil-b/filfox-verifier
 ```
 
 **Configuration:**
-Import the plugin in your Hardhat configuration file:
+Import the plugin in your Hardhat configuration file. This will add the `verifyfilfox` task into your Hardhat project!
 
 ```javascript
 // hardhat.config.js

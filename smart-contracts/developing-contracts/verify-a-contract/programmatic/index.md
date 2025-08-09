@@ -8,7 +8,7 @@ description: >-
 
 Programmatic verification allows you to automate the contract verification process directly from your development environment. This approach is ideal for CI/CD pipelines and streamlined deployment workflows.
 
-## Available Tools
+## Available Frameworks
 
 Choose your preferred development framework:
 
