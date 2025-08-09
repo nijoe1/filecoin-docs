@@ -13,9 +13,10 @@ Contract verification is essential for transparency and trust in the Filecoin ec
 The following FEVM-compatible chain explorers offer contract verification capabilities:
 
 - [Filfox](https://filfox.info/en/contract) - Native Filecoin explorer with comprehensive verification features
-- [Blockscout](https://filecoin.blockscout.com/) - Multi-chain explorer with advanced verification options
+- [Blockscout](https://filecoin.blockscout.com/contract-verification) - Multi-chain explorer with advanced verification options
 - [Starboard](https://fvm.starboard.ventures/explorer/verifier) - FVM-focused verification platform
 - [Beryx](https://beryx.zondax.ch/contract_verifier) - Developer-friendly verification interface
+- [Sourcify](https://docs.sourcify.dev/docs/how-to-verify/) - Multi-chain contract repository with verification tools 
 
 ## Verification Methods
 
