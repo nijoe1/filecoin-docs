@@ -215,8 +215,8 @@ Before we can build the Lotus binaries, thereâ€™s some setup we need to do. Weâ€
     This will output something like:\\
 
     ```plaintext
-    sector-id: {{1000 1} 5}, piece info: {2048 baga6ea4seaqf7ovs6euxa4ktencg2gza7lua32l2ugqu76uqgvnjocek6gtoufi}
-    2023-01-31T10:49:46.562-0400    WARN    preseal seed/seed.go:175        PreCommitOutput: {{1000 1} 5} bagboea4b5abcamxkzmzcciabqqk3xuuvj3k23nfuojboopyw3kg2mblhj6mzipii baga6ea4seaqf7ovs6euxa4ktencg2gza7lua32l2ugqu76uqgvnjocek6gtoufi
+    sector-id: ({1000 1} 5), piece info: {2048 baga6ea4seaqf7ovs6euxa4ktencg2gza7lua32l2ugqu76uqgvnjocek6gtoufi}
+    2023-01-31T10:49:46.562-0400    WARN    preseal seed/seed.go:175        PreCommitOutput: ({1000 1} 5) bagboea4b5abcamxkzmzcciabqqk3xuuvj3k23nfuojboopyw3kg2mblhj6mzipii baga6ea4seaqf7ovs6euxa4ktencg2gza7lua32l2ugqu76uqgvnjocek6gtoufi
     2023-01-31T10:49:46.562-0400    WARN    preseal seed/seed.go:100        PeerID not specified, generating dummy
 
     ...
