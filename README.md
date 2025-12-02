@@ -57,7 +57,7 @@ You can build and preview the documentation locally using the custom CLI wrapper
    npm run setup
    ```
 
-2. **Develop**: Builds and serves the site with live reload at http://localhost:4003.
+2. **Develop**: Builds and serves the site with live reload.
    ```bash
    npm run dev
    ```
