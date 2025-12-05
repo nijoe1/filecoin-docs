@@ -1,32 +1,32 @@
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 import { log } from './log';
-import { getRequiredNodeVersion, runWithNodeVersion, setupNodeVersion } from './node-version';
+import { runWithNodeVersion, setupNodeVersion } from './node-version';
 
-type NodeSetupResult = Awaited<ReturnType<typeof setupNodeVersion>>;
+type NvmPath = Awaited<ReturnType<typeof setupNodeVersion>>['nvmPath'];
 
-export function checkGitbookInstalled(nvmPath: NodeSetupResult['nvmPath']): boolean {
+const getGitbookDir = () => resolve(__dirname, '..', '..', '..', '.gitbook', 'cli');
+
+export const getGitbookBin = () => resolve(getGitbookDir(), 'node_modules', '.bin', 'gitbook');
+
+export const checkGitbookInstalled = () => existsSync(getGitbookBin());
+
+export async function installGitbook(nvmPath: NvmPath): Promise<boolean> {
+  const dir = getGitbookDir();
   try {
-    const output = runWithNodeVersion('which gitbook', nvmPath, { silent: true });
-    
-    // If using NVM, verify the path matches the version
-    if (nvmPath) {
-      return output.includes(`v${getRequiredNodeVersion()}`);
-    }
-
-    // If native (nvmPath is null), we already verified Node version in setupNodeVersion.
-    // So just existing is enough.
-    return !!output.trim();
-  } catch {
+    runWithNodeVersion(`mkdir -p "${dir}" && cd "${dir}" && npm init -y && npm install gitbook-cli@2.3.2`, nvmPath, { silent: false });
+    return checkGitbookInstalled();
+  } catch (err) {
+    log.error(`Install error: ${err}`);
     return false;
   }
 }
 
-export async function ensureGitbookReady(): Promise<NodeSetupResult> {
-  const nodeSetup = await setupNodeVersion();
-
-  if (!checkGitbookInstalled(nodeSetup.nvmPath)) {
+export async function ensureGitbookReady(): Promise<{ originalVersion: string; nvmPath: NvmPath }> {
+  const result = await setupNodeVersion();
+  if (!checkGitbookInstalled()) {
     log.error('gitbook-cli is not installed. Run "npm run setup" first.');
     process.exit(1);
   }
-
-  return nodeSetup;
+  return result;
 }

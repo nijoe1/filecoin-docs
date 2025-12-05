@@ -4,60 +4,30 @@ import { build, preview, serve, setup, stop } from './commands';
 import { printBanner, printUsage } from './log';
 import { getDefaultPort } from './server';
 
-function parseArgs(args: string[]): { command: string; port?: number; verbose: boolean } {
-  let command = 'build';
-  let port: number | undefined;
-  let verbose = false;
-
+const parseArgs = (args: string[]) => {
+  let command = 'build', port: number | undefined, verbose = false;
   for (let i = 0; i < args.length; i++) {
-    const arg = args[i];
-    if (arg === '--verbose' || arg === '-v') {
-      verbose = true;
-    } else if (arg === '--port' || arg === '-p') {
-      port = parseInt(args[++i], 10);
-    } else if (!arg.startsWith('-')) {
-      command = arg;
-    }
+    const a = args[i];
+    if (a === '--verbose' || a === '-v') verbose = true;
+    else if (a === '--port' || a === '-p') port = parseInt(args[++i], 10);
+    else if (!a.startsWith('-')) command = a;
   }
-
   return { command, port, verbose };
-}
+};
 
-async function main(): Promise<void> {
+const main = async () => {
   const { command, port, verbose } = parseArgs(process.argv.slice(2));
-
   printBanner();
+  const opts = { port, verbose };
 
-  const options = { port, verbose };
-
-  try {
-    switch (command) {
-      case 'setup':
-        await setup();
-        break;
-      case 'build':
-        await build();
-        break;
-      case 'serve':
-        await serve(options);
-        break;
-      case 'preview':
-        preview(options);
-        break;
-      case 'stop':
-        stop(options);
-        break;
-      default:
-        printUsage(getDefaultPort());
-        process.exit(1);
-    }
-  } catch (err) {
-    console.error('Fatal error:', err instanceof Error ? err.message : String(err));
-    process.exit(1);
+  switch (command) {
+    case 'setup': await setup(opts); break;
+    case 'build': await build(opts); break;
+    case 'serve': await serve(opts); break;
+    case 'preview': preview(opts); break;
+    case 'stop': stop(opts); break;
+    default: printUsage(getDefaultPort()); process.exit(1);
   }
-}
+};
 
-main().catch((err) => {
-  console.error('Fatal error:', err instanceof Error ? err.message : String(err));
-  process.exit(1);
-});
+main().catch((e) => { console.error('Fatal:', e instanceof Error ? e.message : e); process.exit(1); });

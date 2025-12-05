@@ -9,9 +9,12 @@
     "build": "gitbook-cli build",
     "dev": "gitbook-cli serve",
     "preview": "gitbook-cli preview",
+    "build:verbose": "gitbook-cli build --verbose",
+    "dev:verbose": "gitbook-cli serve --verbose",
+    "preview:verbose": "gitbook-cli preview --verbose",
     "stop": "gitbook-cli stop",
     "build:plugin": "cd gitbook-plugins && npm install && npm run build",
-    "clean": "rm -rf _book _book_temp node_modules package-lock.json gitbook-plugins/node_modules gitbook-plugins/dist gitbook-plugins/package-lock.json"
+    "clean": "rm -rf _book _book_temp node_modules package-lock.json gitbook-plugins/node_modules gitbook-plugins/dist gitbook-plugins/package-lock.json .gitbook/cli/"
   },
   "repository": {
     "type": "git",

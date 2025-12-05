@@ -1,156 +1,76 @@
-import { spawn, ChildProcess } from 'child_process';
-import { existsSync, rmSync, renameSync } from 'fs';
+import { spawn } from 'child_process';
+import { existsSync, renameSync } from 'fs';
 import { log, spin } from './log';
-import { getRequiredNodeVersion, setupNodeVersion } from './node-version';
-import { CONFIG, getBookPath, getTempBookPath } from './constants';
+import { setupNodeVersion, createNvmCommand } from './node-version';
+import { getGitbookBin } from './gitbook';
+import { CONFIG, getBookPath, getTempBookPath, rmRecursive } from './constants';
 
 type NvmPath = Awaited<ReturnType<typeof setupNodeVersion>>['nvmPath'];
-export type BuildState = 'idle' | 'building' | 'cancelling';
 
 export class Builder {
-  private projectRoot: string;
-  private nvmPath: NvmPath;
-  private verbose: boolean;
-  private buildProcess: ChildProcess | null = null;
-  private buildProcessPid: number | null = null;
-  private state: BuildState = 'idle';
+  constructor(
+    private projectRoot: string,
+    private nvmPath: NvmPath,
+    private verbose = false
+  ) {}
 
-  constructor(projectRoot: string, nvmPath: NvmPath, verbose: boolean = false) {
-    this.projectRoot = projectRoot;
-    this.nvmPath = nvmPath;
-    this.verbose = verbose;
-  }
+  async build(files: string[] = []): Promise<boolean> {
+    const tempPath = getTempBookPath(this.projectRoot);
+    const bookPath = getBookPath(this.projectRoot);
+    this.cleanup(tempPath);
 
-  public get currentState(): BuildState {
-    return this.state;
-  }
+    log.debug(`Build output: ${bookPath}`, this.verbose);
+    log.debug(`Temp output: ${tempPath}`, this.verbose);
 
-  public async build(files: string[] = []): Promise<boolean> {
-    this.state = 'building';
-    const tempBookPath = getTempBookPath(this.projectRoot);
-    this.cleanupTemp();
-
+    const isRebuild = files.length > 0;
     const filesMsg = this.formatFiles(files);
-    spin.start(filesMsg ? `Rebuilding (${filesMsg})...` : 'Rebuilding...');
+    spin.start(isRebuild ? `Rebuilding (${filesMsg})...` : 'Building...');
 
     return new Promise((resolve) => {
-      const buildCmd = this.createNvmCommand(`gitbook build . "${tempBookPath}" 2>&1`);
+      const cmd = createNvmCommand(`"${getGitbookBin()}" build . "${tempPath}" 2>&1`, this.nvmPath);
+      log.debug(`Build command: ${cmd}`, this.verbose);
 
-      this.buildProcess = spawn(buildCmd, {
-        stdio: 'pipe',
-        shell: '/bin/bash',
-        cwd: this.projectRoot,
-        detached: true,
-      });
-
-      this.buildProcessPid = this.buildProcess.pid ? -this.buildProcess.pid : null;
-
+      const proc = spawn(cmd, { stdio: 'pipe', shell: '/bin/bash', cwd: this.projectRoot, detached: true });
       let output = '';
-      this.buildProcess.stdout?.on('data', (data) => { output += data.toString(); });
-      this.buildProcess.stderr?.on('data', (data) => { output += data.toString(); });
 
-      this.buildProcess.on('close', (code, signal) => {
-        const wasCancelled = this.state === 'cancelling' || signal != null;
-        this.cleanupProcess();
+      proc.stdout?.on('data', (d) => { output += d; });
+      proc.stderr?.on('data', (d) => { output += d; });
 
-        if (wasCancelled) {
-          this.cleanupTemp();
-          resolve(false);
-          return;
-        }
+      proc.on('close', (code) => {
+        if (this.verbose && output) console.log(output);
 
-        const hasSuccess = /generation finished with success/i.test(output);
-        if (code === 0 || hasSuccess) {
-          if (this.swapBuildOutput()) {
-            spin.succeed('Rebuild complete');
-            resolve(true);
-          } else {
-            spin.fail('Build output missing');
-            resolve(false);
-          }
+        const success = code === 0 || /generation finished with success/i.test(output);
+        if (success && this.swap(tempPath, bookPath)) {
+          spin.succeed(isRebuild ? 'Rebuild complete' : 'Build complete');
+          resolve(true);
         } else {
-          spin.fail('Rebuild failed');
-          this.logErrors(output);
-          this.cleanupTemp();
+          spin.fail(isRebuild ? 'Rebuild failed' : 'Build failed');
+          if (output) console.log(output);
+          this.cleanup(tempPath);
           resolve(false);
         }
       });
 
-      this.buildProcess.on('error', () => {
-        this.cleanupProcess();
+      proc.on('error', () => {
         spin.fail('Build process error');
-        this.cleanupTemp();
+        this.cleanup(tempPath);
         resolve(false);
       });
     });
   }
 
-  public cancel(): void {
-    if (!this.buildProcess || this.state !== 'building') return;
-    this.state = 'cancelling';
-
-    if (this.buildProcessPid) {
-      try {
-        process.kill(this.buildProcessPid, 'SIGTERM');
-      } catch {
-        // Process might already be dead
-      }
-    } else if (this.buildProcess.pid) {
-      this.buildProcess.kill('SIGTERM');
-    }
-
-    setTimeout(() => {
-      if (this.buildProcessPid) {
-        try {
-          process.kill(this.buildProcessPid, 'SIGKILL');
-        } catch {
-          // Process might already be dead
-        }
-      } else if (this.buildProcess?.pid) {
-        this.buildProcess.kill('SIGKILL');
-      }
-    }, 1000);
+  private cleanup(path: string) {
+    try { if (existsSync(path)) rmRecursive(path); } catch { /* ignore */ }
   }
 
-  private cleanupProcess(): void {
-    this.buildProcess = null;
-    this.buildProcessPid = null;
-    this.state = 'idle';
-  }
-
-  private createNvmCommand(command: string): string {
-    if (!this.nvmPath) return command;
-    const version = getRequiredNodeVersion();
-    return `export NVM_DIR="${this.nvmPath.dir}" && . "${this.nvmPath.script}" && nvm use ${version} 2>/dev/null && ${command}`;
-  }
-
-  private cleanupTemp(): void {
-    const tempPath = getTempBookPath(this.projectRoot);
+  private swap(tempPath: string, bookPath: string): boolean {
     try {
-      if (existsSync(tempPath)) {
-        rmSync(tempPath, { recursive: true, force: true });
-      }
-    } catch {
-      // Ignore cleanup errors
-    }
-  }
-
-  private swapBuildOutput(): boolean {
-    const bookPath = getBookPath(this.projectRoot);
-    const tempBookPath = getTempBookPath(this.projectRoot);
-
-    try {
-      if (existsSync(bookPath)) {
-        rmSync(bookPath, { recursive: true, force: true });
-      }
-      if (existsSync(tempBookPath)) {
-        renameSync(tempBookPath, bookPath);
-        return true;
-      }
+      if (existsSync(bookPath)) rmRecursive(bookPath);
+      if (existsSync(tempPath)) { renameSync(tempPath, bookPath); return true; }
       return false;
     } catch (err) {
       log.error(`Failed to swap build output: ${err}`);
-      this.cleanupTemp();
+      this.cleanup(tempPath);
       return false;
     }
   }
@@ -160,17 +80,4 @@ export class Builder {
     if (files.length <= CONFIG.MAX_FILES_TO_SHOW) return files.join(', ');
     return `${files.slice(0, CONFIG.MAX_FILES_TO_SHOW).join(', ')} +${files.length - CONFIG.MAX_FILES_TO_SHOW} more`;
   }
-
-  private logErrors(output: string): void {
-    const errorLines = output.split('\n').filter(line =>
-      /Error:|error:|TypeError|ENOENT|Template render error/.test(line)
-    );
-    if (errorLines.length > 0) {
-      log.error(errorLines.join('\n'));
-    } else {
-      log.error('See console for details');
-      console.log(output.slice(-500));
-    }
-  }
 }
-
