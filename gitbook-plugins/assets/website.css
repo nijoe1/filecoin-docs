@@ -1,0 +1,117 @@
+/**
+ * Critical CSS - Loaded synchronously by GitBook before plugin assets
+ * This prevents flash of unstyled content (FOUC) on first render
+ *
+ * Keep this file minimal - only include styles needed to prevent layout shift
+ */
+
+/* Critical layout - prevent layout shift */
+:root {
+  --tint-1: 29 29 29;
+  --tint-2: 34 34 35;
+  --tint-12: 254 255 255;
+  --fil-bg: rgb(29, 29, 29);
+  --fil-text: rgb(254, 255, 255);
+}
+
+/* Base background immediately */
+html, body {
+  background: rgb(29, 29, 29) !important;
+  color: rgb(254, 255, 255) !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Always reserve scrollbar space to prevent layout shift */
+html {
+  scrollbar-gutter: stable !important;
+}
+
+.book {
+  background: rgb(29, 29, 29) !important;
+}
+
+/* Sidebar background */
+.book-summary {
+  background: rgb(29, 29, 29) !important;
+  border-right: 1px solid rgb(66, 68, 70) !important;
+}
+
+/* Prevent content flash */
+.book-body {
+  background: rgb(29, 29, 29) !important;
+}
+
+.page-wrapper {
+  background: rgb(29, 29, 29) !important;
+}
+
+/* Hide GitBook default navigation arrows */
+.navigation {
+  display: none !important;
+}
+
+/* Hide default GitBook header */
+.book-header {
+  display: none !important;
+}
+
+/* ============================================
+   FOUC Prevention - Initial load only
+   Content fades in, sidebar is always visible
+   ============================================ */
+
+@keyframes fil-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Sidebar is ALWAYS visible - no animation, no transition on the container itself */
+.book-summary {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  animation: none !important;
+  /* Only disable transitions on sidebar container position/size, not child elements */
+  transition: transform 0s, opacity 0s, left 0s, right 0s, width 0s !important;
+}
+
+/* Hide content until plugin loads */
+.book-body .page-wrapper {
+  opacity: 0;
+}
+
+/* Reveal content when layout is ready - animation runs once */
+.book.fil-layout .book-body .page-wrapper {
+  opacity: 1;
+  animation: fil-fade-in 0.15s ease-in forwards;
+}
+
+/* ============================================
+   Page Transitions - Content area ONLY
+   Sidebar stays visible during navigation
+   ============================================ */
+
+/* Content area with GPU-accelerated transitions */
+.page-wrapper {
+  transition: opacity 0.12s ease-out;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* During page transition - hide content via PARENT selector (survives DOM replacement) */
+/* GitBook AJAX replaces .page-wrapper, so class must be on .book which persists */
+.book.fil-page-transitioning .page-wrapper {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Hide scrollbar during page transition to prevent flicker */
+/* Target the .book-body scrollbar (content area), not html scrollbar */
+.book.fil-page-transitioning .book-body {
+  scrollbar-width: none !important;
+  overflow-y: hidden !important;
+}
+.book.fil-page-transitioning .book-body::-webkit-scrollbar {
+  display: none !important;
+}

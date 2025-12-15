@@ -183,9 +183,15 @@ class BuildManager {
     log.info('Watching...');
     const root = this.opts.projectRoot;
     this.watcher = watch(
-      [resolve(root, '**/*.md'), resolve(root, 'book.json'), resolve(root, 'SUMMARY.md')],
+      [
+        resolve(root, '**/*.md'),
+        resolve(root, 'book.json'),
+        resolve(root, 'SUMMARY.md'),
+        resolve(root, 'gitbook-plugins/assets/**/*.css'),
+        resolve(root, 'gitbook-plugins/assets/**/*.js'),
+      ],
       {
-        ignored: [resolve(root, '_book/**'), resolve(root, '_book_temp/**'), resolve(root, 'node_modules/**'), resolve(root, 'gitbook-plugins/**')],
+        ignored: [resolve(root, '_book/**'), resolve(root, '_book_temp/**'), resolve(root, 'node_modules/**'), resolve(root, 'gitbook-plugins/node_modules/**'), resolve(root, 'gitbook-plugins/dist/**')],
         ignoreInitial: true,
         persistent: true,
         awaitWriteFinish: { stabilityThreshold: 100, pollInterval: 50 },

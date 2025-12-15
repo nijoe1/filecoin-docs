@@ -1,10 +1,10 @@
 export type HintStyle = 'info' | 'warning' | 'danger' | 'success';
 
 export const HINT_ICONS: Record<HintStyle, string> = {
-  info: '&#9432;', // ⓘ info circle
-  warning: '&#9888;', // ⚠ warning triangle
-  danger: '&#9888;', // ⚠ warning triangle (red)
-  success: '&#10003;', // ✓ checkmark
+  info: 'ℹ️', // info
+  warning: '⚠️', // warning
+  danger: '🚨', // danger/error
+  success: '✅', // success
 };
 
 export const HINT_TITLES: Record<HintStyle, string> = {

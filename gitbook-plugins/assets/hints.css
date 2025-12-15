@@ -1,119 +1,127 @@
-/* Modern hint/callout styling */
+/* ============================================
+   Hints/Callouts Component
+   Uses theme variables from theme.css
+   Note: --hint-* colors defined in theme.css :root
+   ============================================ */
+
+/* Base hint styling - inline layout */
 .hint {
-    display: flex;
-    margin: 1.5em 0;
-    padding: 1em 1.25em;
-    border-radius: 8px;
-    border-left: 4px solid;
-    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: baseline;
+  margin: 10px 0;
+  padding: 6px 10px;
+  border-radius: var(--fil-radius);
+  border-left: 3px solid;
+  background: var(--fil-bg-elevated);
 }
 
 .hint-icon {
-    flex-shrink: 0;
-    font-size: 1.4em;
-    line-height: 1;
-    margin-right: 1em;
-    margin-top: 0.1em;
+  flex-shrink: 0;
+  font-size: 11px;
+  line-height: 1;
+  margin-right: 6px;
+  position: relative;
+  top: -1px;
 }
 
 .hint-content {
-    flex: 1;
-    min-width: 0;
-}
-
-.hint-title {
-    font-weight: 600;
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.5em;
+  flex: 1;
+  min-width: 0;
 }
 
 .hint-content p {
-    margin: 0;
-    line-height: 1.6;
+  display: inline;
+  margin: 0;
+  line-height: 1.35;
+  color: var(--fil-text-secondary);
+  font-size: 11px;
 }
 
 .hint-content p + p {
-    margin-top: 0.75em;
+  display: block;
+  margin-top: 4px;
+}
+
+.hint-content code {
+  background: var(--fil-bg);
+  padding: 1px 3px;
+  border-radius: var(--fil-radius-sm);
+  font-family: var(--fil-font-mono);
+  font-size: 10px;
+  color: var(--fil-text);
+  border: 1px solid var(--fil-border);
+}
+
+.hint-content a {
+  color: var(--fil-text-link);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.hint-content a:hover {
+  text-decoration: underline;
 }
 
 /* Info - Blue */
 .hint-info {
-    border-left-color: #0969da;
-    background: linear-gradient(135deg, #f0f7ff 0%, #e8f2fc 100%);
+  border-left-color: var(--hint-info);
+  background: var(--hint-info-bg);
 }
 
 .hint-info .hint-icon {
-    color: #0969da;
+  color: var(--hint-info);
 }
 
-.hint-info .hint-title {
-    color: #0550ae;
-}
-
-/* Warning - Yellow/Orange */
+/* Warning - Amber */
 .hint-warning {
-    border-left-color: #d4a72c;
-    background: linear-gradient(135deg, #fff8e6 0%, #fef3cd 100%);
+  border-left-color: var(--hint-warning);
+  background: var(--hint-warning-bg);
 }
 
 .hint-warning .hint-icon {
-    color: #d4a72c;
-}
-
-.hint-warning .hint-title {
-    color: #9a6700;
+  color: var(--hint-warning);
 }
 
 /* Danger - Red */
 .hint-danger {
-    border-left-color: #cf222e;
-    background: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
+  border-left-color: var(--hint-danger);
+  background: var(--hint-danger-bg);
 }
 
 .hint-danger .hint-icon {
-    color: #cf222e;
-}
-
-.hint-danger .hint-title {
-    color: #a40e26;
+  color: var(--hint-danger);
 }
 
 /* Success - Green */
 .hint-success {
-    border-left-color: #1a7f37;
-    background: linear-gradient(135deg, #f0fff4 0%, #dafbe1 100%);
+  border-left-color: var(--hint-success);
+  background: var(--hint-success-bg);
 }
 
 .hint-success .hint-icon {
-    color: #1a7f37;
+  color: var(--hint-success);
 }
 
-.hint-success .hint-title {
-    color: #116329;
-}
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    .hint {
-        background: rgba(255, 255, 255, 0.05);
-    }
+/* ============================================
+   Mobile Responsive
+   ============================================ */
+@media (max-width: 767px) {
+  .hint {
+    padding: 5px 8px;
+    margin: 8px 0;
+  }
 
-    .hint-info {
-        background: rgba(9, 105, 218, 0.1);
-    }
+  .hint-icon {
+    font-size: 10px;
+    margin-right: 5px;
+  }
 
-    .hint-warning {
-        background: rgba(212, 167, 44, 0.1);
-    }
+  .hint-content p {
+    font-size: 10px;
+  }
 
-    .hint-danger {
-        background: rgba(207, 34, 46, 0.1);
-    }
-
-    .hint-success {
-        background: rgba(26, 127, 55, 0.1);
-    }
+  .hint-content code {
+    font-size: 9px;
+  }
 }

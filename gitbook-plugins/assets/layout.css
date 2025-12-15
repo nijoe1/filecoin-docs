@@ -1,0 +1,755 @@
+/*
+ * Filecoin Docs - Layout System
+ * CSS Grid based 3-column layout: Sidebar | Content | TOC
+ */
+
+/* ============================================
+   Layout Variables
+   ============================================ */
+:root {
+  --layout-navbar-height: 56px;
+  --layout-sidebar-width: 260px;
+  --layout-toc-width: 220px;
+  --layout-max-width: 1440px;
+  --layout-toc-scroll-offset: 150;
+  --layout-init-delay: 50;
+  --layout-resize-debounce: 100;
+  --layout-copy-feedback-duration: 2000;
+  /* Bottom nav: margin-top(48) + padding-top(24) + border(1) + link-height(~70) + page-padding-bottom(80) ≈ 223px */
+  /* Using 180px to leave TOC slightly above the nav while still clearing it */
+  --layout-bottom-nav-height: 180px;
+  /* Sidebar footer height for "Powered by GitBook" */
+  --layout-sidebar-footer-height: 48px;
+}
+
+/* ============================================
+   Main Layout Container - CSS Grid (3-column: sidebar | content | toc)
+   ============================================ */
+.fil-layout {
+  display: grid !important;
+  grid-template-columns: var(--layout-sidebar-width) 1fr var(--layout-toc-width) !important;
+  grid-template-areas: "sidebar content toc" !important;
+  max-width: var(--layout-max-width) !important;
+  margin: 0 auto !important;
+  min-height: calc(100vh - var(--layout-navbar-height)) !important;
+  margin-top: var(--layout-navbar-height) !important;
+  background: var(--fil-bg) !important;
+}
+
+/* ============================================
+   Main Content Container - Middle column
+   ============================================ */
+.fil-main-scroll {
+  grid-area: content !important;
+  position: relative !important;
+  display: block !important;
+  background: var(--fil-bg-content) !important;
+  min-width: 0 !important; /* Prevent grid blowout */
+}
+
+/* Force dark background on html/body */
+html,
+body {
+  background: var(--fil-bg) !important;
+}
+
+/* ============================================
+   Navbar - Fixed at top, outside grid
+   ============================================ */
+.fil-navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: var(--layout-navbar-height) !important;
+  background: var(--fil-bg) !important;
+  border-bottom: 1px solid var(--fil-border-subtle) !important;
+  z-index: 200 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.fil-navbar-inner {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: var(--layout-max-width) !important;
+  padding: 0 24px !important;
+  gap: 16px !important;
+}
+
+.fil-navbar-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-shrink: 0 !important;
+  width: var(--layout-sidebar-width) !important;
+}
+
+.fil-menu-btn {
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: var(--fil-radius) !important;
+  color: var(--fil-text-secondary) !important;
+  cursor: pointer !important;
+}
+
+.fil-menu-btn:hover {
+  background: var(--fil-bg-hover) !important;
+  color: var(--fil-text) !important;
+}
+
+.fil-logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+  color: var(--fil-text) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+.fil-logo-icon {
+  flex-shrink: 0 !important;
+}
+
+.fil-logo-text {
+  white-space: nowrap !important;
+}
+
+/* ============================================
+   Left Sidebar - Fixed position (stays in view during scroll)
+   ============================================ */
+.fil-layout .book-summary {
+  position: fixed !important;
+  top: var(--layout-navbar-height) !important;
+  left: max(0px, calc((100vw - var(--layout-max-width)) / 2)) !important;
+  bottom: 0 !important;
+  width: var(--layout-sidebar-width) !important;
+  transform: none !important;
+  animation: none !important;
+  z-index: 100 !important;
+  overflow-y: auto !important;
+  background: var(--fil-bg-sidebar) !important;
+  border-right: 1px solid var(--fil-border-subtle) !important;
+  scrollbar-color: rgb(var(--tint-7)) transparent !important;
+  scrollbar-width: thin !important;
+  /* Reserve space at bottom for sticky footer */
+  padding-bottom: var(--layout-sidebar-footer-height) !important;
+}
+
+/* ============================================
+   Sidebar Footer - "Powered by GitBook" sticky at bottom
+   ============================================ */
+.fil-layout .book-summary .gitbook-link {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: max(0px, calc((100vw - var(--layout-max-width)) / 2)) !important;
+  width: var(--layout-sidebar-width) !important;
+  height: var(--layout-sidebar-footer-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--fil-bg-sidebar) !important;
+  border-top: 1px solid var(--fil-border-subtle) !important;
+  border-right: 1px solid var(--fil-border-subtle) !important;
+  color: var(--fil-text-muted) !important;
+  font-size: 12px !important;
+  text-decoration: none !important;
+  z-index: 101 !important;
+}
+
+.fil-layout .book-summary .gitbook-link:hover {
+  color: var(--fil-text-secondary) !important;
+  background: var(--fil-bg-hover) !important;
+}
+
+/* Change "Published with GitBook" to "Powered by GitBook" using CSS */
+.fil-layout .book-summary .gitbook-link {
+  font-size: 0 !important; /* Hide original text */
+}
+
+.fil-layout .book-summary .gitbook-link::before {
+  content: "Powered by GitBook" !important;
+  font-size: 12px !important;
+}
+
+/* Hide the divider before GitBook link and the parent li styling */
+.fil-layout .book-summary ul.summary > li:last-child {
+  position: static !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Hide the divider that precedes the GitBook link */
+.fil-layout .book-summary ul.summary > li.divider:nth-last-child(2) {
+  display: none !important;
+}
+
+/* Placeholder for fixed sidebar in grid */
+.fil-layout::before {
+  content: "" !important;
+  display: block !important;
+  grid-area: sidebar !important;
+}
+
+.fil-layout .book-summary .book-search,
+.fil-layout .book-search-input,
+.fil-layout #book-search-input {
+  display: none !important;
+}
+
+/* Hide search results list but keep .search-noresults visible (contains page content) */
+.fil-layout #book-search-results .search-results {
+  display: none !important;
+}
+
+/* Ensure page content is always visible even when search is "open" */
+.fil-layout #book-search-results .search-noresults {
+  display: block !important;
+}
+
+/* ============================================
+   Main Content Area - Inside .fil-main-scroll
+   ============================================ */
+.fil-layout .book-header {
+  display: none !important;
+}
+
+.fil-layout .book-body {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  background: var(--fil-bg-content) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.fil-layout .body-inner {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  overflow: visible !important;
+  background: var(--fil-bg-content) !important;
+  min-height: auto !important;
+}
+
+.fil-layout .page-wrapper {
+  background: var(--fil-bg-content) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.fil-layout .page-inner {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 40px 32px 80px 48px !important;
+  background: var(--fil-bg-content) !important;
+}
+
+/* ============================================
+   Right Sidebar (TOC) - Fixed position (stays in view during scroll)
+   ============================================ */
+.fil-toc {
+  position: fixed !important;
+  top: var(--layout-navbar-height) !important;
+  right: max(2px, calc((100vw - var(--layout-max-width)) / 2 + 2px)) !important;
+  bottom: var(--layout-bottom-nav-height) !important;
+  width: var(--layout-toc-width) !important;
+  padding: 24px 16px !important;
+  overflow-y: auto !important;
+  background: var(--fil-bg) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  z-index: 101 !important;
+  scrollbar-width: none !important;
+}
+
+/* Placeholder for fixed TOC in grid */
+.fil-layout::after {
+  content: "" !important;
+  display: block !important;
+  grid-area: toc !important;
+}
+
+.fil-toc-header {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--fil-text-muted) !important;
+  margin-bottom: 12px !important;
+  padding: 0 !important;
+  border-bottom: none !important;
+}
+
+.fil-toc-nav {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+/* Base TOC item styles */
+.fil-toc-item {
+  display: block !important;
+  padding: 6px 12px !important;
+  border-radius: var(--fil-radius) !important;
+  text-decoration: none !important;
+  line-height: 1.4 !important;
+  border-left: 2px solid transparent !important;
+  transition: color 0.15s ease !important;
+}
+
+.fil-toc-item:hover {
+  color: var(--fil-text) !important;
+}
+
+.fil-toc-item.active {
+  border-left-color: var(--fil-primary) !important;
+}
+
+/* H2 in TOC - Primary level, most prominent */
+.fil-toc-level-2 {
+  padding-left: 12px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--fil-text-secondary) !important;
+}
+
+.fil-toc-level-2:hover,
+.fil-toc-level-2.active {
+  color: var(--fil-text) !important;
+}
+
+/* H3 in TOC - Secondary level, indented and grayer */
+.fil-toc-level-3 {
+  padding-left: 24px !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: var(--fil-text-muted) !important;
+}
+
+.fil-toc-level-3:hover,
+.fil-toc-level-3.active {
+  color: var(--fil-text-secondary) !important;
+}
+
+/* ============================================
+   Sidebar Overlay (Mobile) - Fixed, outside grid
+   ============================================ */
+.fil-sidebar-overlay {
+  display: none !important;
+  position: fixed !important;
+  top: var(--layout-navbar-height) !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  z-index: 101 !important;
+}
+
+/* ============================================
+   Breadcrumb
+   ============================================ */
+.fil-breadcrumb {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 24px !important;
+  font-size: 13px !important;
+}
+
+.fil-breadcrumb-item {
+  color: var(--fil-text-muted) !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+}
+
+.fil-breadcrumb-item:hover:not(.fil-breadcrumb-current) {
+  color: var(--fil-text-link) !important;
+}
+
+.fil-breadcrumb-current {
+  color: var(--fil-text-secondary) !important;
+}
+
+.fil-breadcrumb-sep {
+  color: var(--fil-border) !important;
+}
+
+/* ============================================
+   Page Header - GitBook responsive sizing
+   text-2xl @xs:text-3xl @lg:text-4xl leading-tight font-bold
+   ============================================ */
+.fil-page-header {
+  margin-bottom: 24px !important;
+}
+
+/* Use h1.fil-page-title to beat .markdown-section h1 specificity (0,1,1 vs 0,1,1 - last wins) */
+h1.fil-page-title,
+.markdown-section h1.fil-page-title {
+  font-size: 36px !important; /* text-4xl: 2.25rem */
+  font-weight: var(--fil-font-bold, 700) !important;
+  color: var(--fil-text) !important;
+  line-height: var(--fil-leading-tight, 1.25) !important; /* leading-tight */
+  margin: 0 0 12px 0 !important;
+  padding-top: 0 !important; /* Override .markdown-section h1 padding */
+  letter-spacing: -0.025em !important; /* tracking-tight */
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+p.fil-page-description,
+.markdown-section p.fil-page-description {
+  font-size: 16px !important; /* scalar-page-description */
+  color: rgb(190, 192, 197) !important; /* tint-11 - lighter gray */
+  line-height: 1.625 !important;
+  margin: 0 !important;
+  max-width: 680px !important;
+}
+
+/* Responsive page title - smaller on mobile */
+@media (max-width: 767px) {
+  h1.fil-page-title,
+  .markdown-section h1.fil-page-title {
+    font-size: 24px !important; /* text-2xl on mobile */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  h1.fil-page-title,
+  .markdown-section h1.fil-page-title {
+    font-size: 30px !important; /* text-3xl on tablet */
+  }
+}
+
+/* Desktop: explicit 36px to ensure override */
+@media (min-width: 1024px) {
+  h1.fil-page-title,
+  .markdown-section h1.fil-page-title {
+    font-size: 36px !important; /* text-4xl on desktop */
+  }
+}
+
+/* ============================================
+   Extra Large Desktop (>= 1536px) - GitBook 2xl
+   ============================================ */
+@media (min-width: 1536px) {
+  :root {
+    --layout-sidebar-width: 280px;
+    --layout-toc-width: 240px;
+  }
+}
+
+/* ============================================
+   Large Desktop (1280px - 1535px) - GitBook xl
+   ============================================ */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  :root {
+    --layout-sidebar-width: 260px;
+    --layout-toc-width: 220px;
+  }
+}
+
+/* ============================================
+   Desktop (1024px - 1279px) - GitBook lg
+   ============================================ */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :root {
+    --layout-sidebar-width: 240px;
+    --layout-toc-width: 200px;
+  }
+
+  .fil-layout .page-inner {
+    padding: 32px 24px !important;
+  }
+}
+
+/* ============================================
+   Tablet (768px - 1023px)
+   2-column: Sidebar | Content (no TOC)
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --layout-sidebar-width: 240px;
+  }
+
+  .fil-layout {
+    grid-template-columns: var(--layout-sidebar-width) 1fr !important;
+    grid-template-areas: "sidebar content" !important;
+  }
+
+  .fil-toc {
+    display: none !important;
+  }
+
+  .fil-layout .page-inner {
+    padding: 32px 24px !important;
+  }
+}
+
+/* ============================================
+   Mobile (< 768px)
+   Single column, sidebar slides in
+   ============================================ */
+@media (max-width: 767px) {
+  :root {
+    --layout-navbar-height: 52px;
+  }
+
+  .fil-layout {
+    display: block !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin-top: var(--layout-navbar-height) !important;
+    overflow: visible !important;
+  }
+
+  .fil-layout::before {
+    display: none !important;
+  }
+
+  .fil-main-scroll {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .fil-menu-btn {
+    display: flex !important;
+  }
+
+  .fil-navbar-inner {
+    padding: 0 16px !important;
+  }
+
+  .fil-navbar-left {
+    width: auto !important;
+  }
+
+  .fil-logo-text {
+    display: none !important;
+  }
+
+  .fil-layout .book-summary {
+    position: fixed !important;
+    top: var(--layout-navbar-height) !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 85vw !important;
+    height: auto !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s ease !important;
+    border-right: none !important;
+    z-index: 102 !important;
+  }
+
+  .fil-layout.fil-sidebar-open .book-summary {
+    transform: translateX(0) !important;
+  }
+
+  /* Mobile: GitBook link stays at bottom of sidebar */
+  .fil-layout .book-summary .gitbook-link {
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 85vw !important;
+    border-right: none !important;
+  }
+
+  .fil-toc {
+    display: none !important;
+  }
+
+  .fil-layout .book-body {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .fil-layout .page-inner {
+    max-width: 100% !important;
+    padding: 24px 16px !important;
+    padding-bottom: 60px !important;
+  }
+
+  body.fil-sidebar-open > .fil-sidebar-overlay {
+    display: block !important;
+  }
+
+  .fil-breadcrumb {
+    font-size: 12px !important;
+    gap: 6px !important;
+  }
+}
+
+.fil-code-block-wrapper {
+  position: relative !important;
+}
+
+.fil-code-copy-btn {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  background: var(--fil-bg-elevated) !important;
+  border: 1px solid var(--fil-border) !important;
+  border-radius: var(--fil-radius) !important;
+  color: var(--fil-text-muted) !important;
+  cursor: pointer !important;
+  opacity: 0 !important;
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease !important;
+  z-index: 10 !important;
+}
+
+.fil-code-block-wrapper:hover .fil-code-copy-btn,
+.fil-code-copy-btn:focus {
+  opacity: 1 !important;
+}
+
+.fil-code-copy-btn:hover {
+  background: var(--fil-bg-hover) !important;
+  color: var(--fil-text) !important;
+}
+
+.fil-code-copy-btn.copied {
+  color: var(--hint-success, #22c55e) !important;
+  border-color: var(--hint-success, #22c55e) !important;
+}
+
+.fil-code-copy-btn svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* ============================================
+   Card Grid (transformed from table[data-view="cards"])
+   ============================================ */
+.fil-card-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 16px !important;
+  margin: 24px 0 !important;
+}
+
+.fil-card {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--fil-bg-elevated) !important;
+  border: 1px solid var(--fil-border) !important;
+  border-radius: var(--fil-radius-lg) !important;
+  overflow: hidden !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.fil-card:hover {
+  border-color: var(--fil-primary) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.fil-card-cover {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 140px !important;
+  background: var(--fil-bg-code) !important;
+  overflow: hidden !important;
+  padding: 24px !important;
+}
+
+.fil-card-cover img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+.fil-card-content {
+  padding: 16px !important;
+  flex: 1 !important;
+}
+
+.fil-card-title {
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  color: var(--fil-text) !important;
+  line-height: 1.4 !important;
+}
+
+.fil-card-desc {
+  margin-top: 8px !important;
+  font-size: 13px !important;
+  color: var(--fil-text-muted) !important;
+  line-height: 1.5 !important;
+}
+
+.fil-card-link {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+}
+
+/* Mobile: single column */
+@media (max-width: 767px) {
+  .fil-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .fil-card-cover {
+    height: 120px !important;
+    padding: 20px !important;
+  }
+
+  .fil-card-content {
+    padding: 12px !important;
+  }
+
+  .fil-card-title {
+    font-size: 14px !important;
+  }
+
+  .fil-card-desc {
+    font-size: 12px !important;
+    margin-top: 6px !important;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .fil-layout .book-summary {
+    transition: none !important;
+  }
+
+  .fil-code-copy-btn {
+    transition: none !important;
+  }
+
+  .fil-card {
+    transition: none !important;
+  }
+}

@@ -1,6 +1,6 @@
 import { createTab, createTabBody } from './tabs';
 import { processEmbeds } from './embed';
-import { getHintIcon, getHintTitle } from './hints';
+import { getHintIcon } from './hints';
 
 interface Block {
   name: string;
@@ -14,6 +14,7 @@ interface ParentBlock {
 
 interface Page {
   content: string;
+  description?: string;
 }
 
 interface Book {
@@ -34,13 +35,27 @@ interface BlockContext {
 module.exports = {
   book: {
     assets: './assets',
-    css: ['tabs.css', 'embed.css', 'hints.css'],
-    js: ['tabs.js'],
+    css: ['theme.css', 'tabs.css', 'embed.css', 'hints.css', 'layout.css'],
+    js: ['tabs.js', 'sidebar.js', 'layout.js'],
   },
 
   hooks: {
     'page:before': function (page: Page): Page {
       page.content = processEmbeds(page.content);
+
+      // Inject description as a hidden element so client-side JS can read it
+      // (meta tags don't update during AJAX navigation)
+      if (page.description) {
+        const escapedDesc = page.description
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+        page.content =
+          `<div class="page-description-data" style="display:none !important;">${escapedDesc}</div>\n` +
+          page.content;
+      }
+
       return page;
     },
   },
@@ -69,16 +84,12 @@ module.exports = {
       process: async function (this: BlockContext, block: Block): Promise<string> {
         const style = (block.kwargs && block.kwargs.style) || 'info';
         const icon = getHintIcon(style);
-        const title = getHintTitle(style);
         const renderedBody = await this.book.renderBlock('markdown', block.body || '');
 
         return `
           <div class="hint hint-${style}">
             <div class="hint-icon">${icon}</div>
-            <div class="hint-content">
-              <div class="hint-title">${title}</div>
-              ${renderedBody}
-            </div>
+            <div class="hint-content">${renderedBody}</div>
           </div>
         `.trim();
       },

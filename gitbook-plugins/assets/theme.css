@@ -1,0 +1,905 @@
+/*
+ * Filecoin Docs - Theme Styles
+ * Handles: Colors, Typography, Component Styling
+ * Layout/positioning is in layout.css
+ * Based on GitBook deployed styles
+ */
+
+/* ============================================
+   Theme Variables - Matching GitBook
+   ============================================ */
+:root {
+  /* ============================================
+     GitBook Tint Scale (dark theme)
+     ============================================ */
+  --tint-1: 29 29 29;
+  --tint-2: 34 34 35;
+  --tint-3: 43 44 45;
+  --tint-4: 47 48 49;
+  --tint-5: 52 54 55;
+  --tint-6: 56 58 60;
+  --tint-7: 66 68 70;
+  --tint-8: 76 78 81;
+  --tint-9: 127 133 144;
+  --tint-10: 138 145 156;
+  --tint-11: 190 192 197;
+  --tint-12: 254 255 255;
+
+  /* ============================================
+     GitBook Primary Scale
+     ============================================ */
+  --primary-9: 52 109 219;
+  --primary-10: 80 139 252;
+  --primary-11: 167 193 239;
+
+  /* ============================================
+     GitBook Semantic Colors
+     ============================================ */
+  --warning-9: 254 154 0;
+  --warning-11: 224 184 145;
+  --danger-9: 251 44 54;
+  --danger-11: 248 168 161;
+  --success-9: 0 201 80;
+  --success-11: 155 208 161;
+  --neutral-9: 120 120 120;
+
+  /* ============================================
+     GitBook Typography Scale (px values)
+     ============================================ */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+
+  /* ============================================
+     GitBook Scalar Typography
+     ============================================ */
+  --scalar-heading-1: 24px;
+  --scalar-page-description: 16px;
+  --scalar-heading-2: 20px;
+  --scalar-heading-3: 20px;
+  --scalar-heading-4: 16px;
+  --scalar-paragraph: 16px;
+  --scalar-small: 14px;
+  --scalar-mini: 13px;
+  --scalar-micro: 12px;
+
+  /* ============================================
+     Line Heights & Letter Spacing
+     ============================================ */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-wide: 0.025em;
+
+  /* ============================================
+     Radius Scale (px values)
+     ============================================ */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+
+  /* Scalar radius (GitBook specific) */
+  --scalar-border-width: 0.5px;
+  --scalar-radius: 3px;
+  --scalar-radius-lg: 6px;
+  --scalar-radius-xl: 8px;
+
+  /* ============================================
+     Spacing
+     ============================================ */
+  --spacing: 4px;                           /* 4px base unit */
+  --content-scroll-margin: 64px;
+
+  /* ============================================
+     Filecoin Theme Variables (using GitBook scale)
+     ============================================ */
+  /* Primary colors */
+  --fil-primary: rgb(var(--primary-9));
+  --fil-primary-hover: rgb(var(--primary-10));
+  --fil-primary-subtle: rgba(52, 109, 219, 0.15);
+
+  /* Text colors */
+  --fil-text: rgb(var(--tint-12));
+  --fil-text-secondary: rgb(var(--tint-11));
+  --fil-text-muted: rgb(var(--tint-10));
+  --fil-text-link: rgb(var(--primary-10));
+
+  /* Background colors */
+  --fil-bg: rgb(var(--tint-1));
+  --fil-bg-sidebar: rgb(var(--tint-1));
+  --fil-bg-content: rgb(var(--tint-1));
+  --fil-bg-hover: rgb(var(--tint-3));
+  --fil-bg-active: rgb(var(--tint-4));
+  --fil-bg-elevated: rgb(var(--tint-2));
+
+  /* Borders */
+  --fil-border: rgb(var(--tint-7));
+  --fil-border-subtle: rgb(var(--tint-5));
+
+  /* Code blocks */
+  --fil-bg-code: rgb(var(--tint-2));
+
+  /* Spacing & sizing - using scalar values */
+  --fil-radius: var(--scalar-radius-lg);    /* 6px */
+  --fil-radius-lg: var(--scalar-radius-xl); /* 8px */
+  --fil-radius-sm: var(--scalar-radius);    /* 3px */
+
+  /* Typography */
+  --fil-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", sans-serif;
+  --fil-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Monaco,
+    "Cascadia Code", Consolas, monospace;
+
+  /* Font weights */
+  --fil-font-normal: 400;
+  --fil-font-medium: 500;
+  --fil-font-semibold: 600;
+  --fil-font-bold: 700;
+
+  /* Line heights */
+  --fil-leading-tight: var(--leading-tight);
+  --fil-leading-snug: var(--leading-snug);
+  --fil-leading-normal: var(--leading-normal);
+  --fil-leading-relaxed: var(--leading-relaxed);
+
+  /* Hint colors */
+  --hint-info: rgb(var(--tint-10));
+  --hint-info-bg: rgba(138, 145, 156, 0.12);
+  --hint-warning: rgb(var(--warning-9));
+  --hint-warning-bg: rgba(254, 154, 0, 0.12);
+  --hint-danger: rgb(var(--danger-9));
+  --hint-danger-bg: rgba(251, 44, 54, 0.12);
+  --hint-success: rgb(var(--success-9));
+  --hint-success-bg: rgba(0, 201, 80, 0.12);
+
+  /* Shiki syntax highlighting */
+  --shiki-color-text: rgb(var(--tint-11));
+  --shiki-token-punctuation: rgb(var(--tint-11));
+  --shiki-token-link: rgb(var(--primary-10));
+  --shiki-token-comment: rgb(var(--neutral-9));
+  --shiki-token-constant: rgb(var(--warning-11));
+  --shiki-token-string: rgb(var(--warning-11));
+  --shiki-token-string-expression: rgb(var(--success-11));
+  --shiki-token-keyword: rgb(var(--danger-11));
+  --shiki-token-parameter: rgb(var(--warning-11));
+  --shiki-token-function: rgb(var(--primary-11));
+  --shiki-token-inserted: rgb(var(--success-10, 0 176 54));
+  --shiki-token-deleted: rgb(var(--danger-10, 255 52 59));
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+.book {
+  background: var(--fil-bg) !important;
+  color: var(--fil-text) !important;
+  font-family: var(--fil-font) !important;
+  font-size: 16px !important;
+}
+
+.book.color-theme-1,
+.book.color-theme-2 {
+  background: var(--fil-bg) !important;
+}
+
+/* ============================================
+   Sidebar Styling (position in layout.css)
+   ============================================ */
+.book-summary {
+  background: var(--fil-bg-sidebar) !important;
+  border-right: 1px solid var(--fil-border-subtle) !important;
+}
+
+.book-summary ul.summary {
+  padding: 16px 12px !important;
+}
+
+/* Remove all nested ul indentation - keep dropdowns at same level */
+/* Override GitBook default: .book-summary ul.summary li ul{padding-left:20px} */
+.book-summary ul.summary ul,
+.book-summary ul.summary li ul,
+.book-summary ul.summary li.chapter ul,
+.book-summary ul.summary li ul.articles {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* All nested/child links - indented with smaller font */
+.book-summary ul.summary li ul.articles li a,
+.book-summary ul.summary li ul.articles li span,
+.book-summary ul.summary li.chapter ul li a,
+.book-summary ul.summary li.chapter ul li span {
+  padding: 6px 12px 6px 24px !important;
+  font-size: 13px !important;
+}
+
+.book-summary ul.summary li {
+  list-style: none !important;
+}
+
+/* Main section headers (Basics, Storage providers, etc.) - GitBook style */
+.book-summary ul.summary li.header {
+  font-size: 12px !important;                     /* text-xs */
+  font-weight: var(--fil-font-semibold) !important; /* 600 */
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;              /* tracking-wide */
+  color: var(--fil-text) !important;
+  padding: 24px 12px 12px !important;
+  margin: 0 !important;
+}
+
+/* Nav links - all items, GitBook style: text-sm text-tint-strong/7 */
+.book-summary ul.summary li a,
+.book-summary ul.summary li span {
+  color: rgba(254, 255, 255, 0.7) !important;     /* text-tint-strong/7 (70% opacity) */
+  padding: 6px 12px !important;                   /* p-1.5 pl-3 */
+  display: block !important;
+  border-radius: var(--fil-radius) !important;    /* rounded-md */
+  text-decoration: none !important;
+  font-size: 14px !important;                     /* text-sm */
+  font-weight: var(--fil-font-normal) !important; /* 400 */
+  line-height: 1.5 !important;
+  position: relative !important;
+  transition: color 0.15s ease, background 0.15s ease !important;
+}
+
+.book-summary ul.summary li a:hover {
+  color: var(--fil-text) !important;
+  background: var(--fil-bg-hover) !important;
+}
+
+/* Active link - GitBook style with left border indicator */
+.book-summary ul.summary li.active > a {
+  color: var(--fil-primary-hover) !important;     /* text-primary-subtle */
+  background: var(--fil-primary-subtle) !important;
+  font-weight: var(--fil-font-semibold) !important; /* 600 */
+}
+
+/* Left border indicator for active item */
+.book-summary ul.summary li.active > a::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 2px !important;
+  background: var(--fil-primary) !important;      /* before:bg-primary-solid */
+  border-radius: 1px !important;
+}
+
+/* Dividers */
+.book-summary ul.summary li.divider {
+  background: var(--fil-border-subtle) !important;
+  height: 1px !important;
+  margin: 12px !important;
+}
+
+.book-summary li.has-children > .fil-nav-item-row {
+  display: flex !important;
+  align-items: center !important;
+  padding: 8px 12px !important;
+  border-radius: var(--fil-radius) !important;
+}
+
+.book-summary li.has-children > .fil-nav-item-row:hover {
+  background: var(--fil-bg-hover) !important;
+}
+
+.book-summary li.has-children > .fil-nav-item-row > a {
+  flex: 1 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.book-summary li.has-children .fil-nav-toggle {
+  background: transparent !important;
+  border: none !important;
+  color: var(--fil-text-muted) !important;
+  cursor: pointer !important;
+  padding: 4px !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  border-radius: var(--fil-radius-sm) !important;
+  order: 1 !important;
+}
+
+.book-summary li.has-children .fil-nav-toggle:hover {
+  color: var(--fil-text) !important;
+}
+
+.book-summary li.has-children .fil-nav-toggle svg {
+  transition: transform 0.2s ease !important;
+}
+
+.book-summary li.has-children.expanded .fil-nav-toggle svg {
+  transform: rotate(90deg) !important;
+}
+
+.book-summary li.has-children > ul {
+  display: none !important;
+  padding-left: 0 !important;
+}
+
+.book-summary li.has-children.expanded > ul {
+  display: block !important;
+}
+
+.book-summary li.has-children.active > .fil-nav-item-row {
+  background: var(--fil-primary-subtle) !important;
+  position: relative !important;
+}
+
+.book-summary li.has-children.active > .fil-nav-item-row::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 2px !important;
+  background: var(--fil-primary) !important;
+  border-radius: 1px !important;
+}
+
+.book-summary li.has-children.active > .fil-nav-item-row > a {
+  color: var(--fil-primary-hover) !important;
+  font-weight: var(--fil-font-semibold) !important;
+}
+
+/* Fix search blur issue */
+.book .book-body {
+  filter: none !important;
+  -webkit-filter: none !important;
+  opacity: 1 !important;
+}
+
+.book.with-search-focus .book-body {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+/* ============================================
+   Content Area Styling (position in layout.css)
+   ============================================ */
+.book-body {
+  background: var(--fil-bg-content) !important;
+}
+
+.page-wrapper {
+  background: var(--fil-bg-content) !important;
+}
+
+.page-inner {
+  background: var(--fil-bg-content) !important;
+}
+
+/* ============================================
+   Typography - Markdown Section
+   Based on GitBook scalar values
+   ============================================ */
+.markdown-section {
+  background: var(--fil-bg-content) !important;
+  color: rgb(var(--tint-12)) !important;          /* Main text uses tint-12 */
+  font-size: 16px !important;                     /* scalar-paragraph */
+  line-height: 1.625 !important;                  /* leading-relaxed */
+  -webkit-font-smoothing: antialiased !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  scrollbar-color: rgb(var(--tint-7)) transparent !important;
+  scrollbar-width: thin !important;
+}
+
+/* Reset inherited colors - ensure text inherits properly */
+.markdown-section * {
+  color: inherit;
+}
+
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section h5,
+.markdown-section h6 {
+  color: rgb(254, 255, 255) !important;           /* tint-12 */
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-weight: 600 !important;                    /* font-semibold */
+  line-height: 1.375 !important;                  /* leading-snug */
+}
+
+/* H1 in markdown content - GitBook: text-xl → text-2xl → text-3xl responsive
+   Base: 20px (text-xl), @xs: 24px (text-2xl), @lg: 30px (text-3xl)
+   Uses leading-tight, font-semibold, tracking-tight */
+.markdown-section h1 {
+  font-size: 30px !important;                     /* text-3xl at desktop */
+  margin: 0 0 16px !important;
+  padding-top: 1em !important;                    /* pt-[1em] */
+  font-weight: 600 !important;                    /* font-semibold */
+  line-height: 1.25 !important;                   /* leading-tight */
+  letter-spacing: -0.025em !important;            /* tracking-tight */
+  scroll-margin-top: 16px !important;
+}
+
+.markdown-section h1:first-child {
+  padding-top: 0 !important;                      /* No top padding for first */
+}
+
+/* H2 - GitBook: text-xl → text-2xl → text-3xl responsive
+   Base: 20px (text-xl), @xs: 24px (text-2xl), @lg: 30px (text-3xl)
+   Uses leading-tight, font-semibold */
+.markdown-section h2 {
+  font-size: 30px !important;                     /* text-3xl at desktop */
+  margin: 0 0 12px !important;
+  padding-top: 1em !important;                    /* pt-[1em] */
+  font-weight: 600 !important;                    /* font-semibold */
+  line-height: 1.25 !important;                   /* leading-tight */
+  letter-spacing: -0.0125em !important;           /* tracking between tight and normal */
+  scroll-margin-top: 16px !important;
+}
+
+.markdown-section h2:first-child {
+  padding-top: 0 !important;
+}
+
+/* H3 - GitBook: text-lg → text-xl → text-2xl responsive
+   Base: 18px (text-lg), @xs: 20px (text-xl), @lg: 24px (text-2xl)
+   Uses leading-snug, font-semibold */
+.markdown-section h3 {
+  font-size: 24px !important;                     /* text-2xl at desktop */
+  margin: 0 0 8px !important;
+  padding-top: 0.75em !important;                 /* pt-[0.75em] */
+  font-weight: 600 !important;                    /* font-semibold */
+  line-height: 1.375 !important;                  /* leading-snug */
+  scroll-margin-top: 16px !important;
+}
+
+.markdown-section h3:first-child {
+  padding-top: 0 !important;
+}
+
+/* H4-H6: 16px (text-base) - GitBook markdown */
+.markdown-section h4 {
+  font-size: 16px !important;                     /* text-base */
+  margin: 0 0 6px !important;
+  padding-top: 0.5em !important;
+  scroll-margin-top: 1rem !important;
+}
+
+.markdown-section h4:first-child {
+  padding-top: 0 !important;
+}
+
+/* Main content text - GitBook uses tint-12 for main text, leading-relaxed */
+.markdown-section p {
+  margin: 16px 0 !important;
+  font-size: 16px !important;                   /* scalar-paragraph */
+  line-height: 1.625 !important;                /* leading-relaxed */
+  color: rgb(254, 255, 255) !important;         /* tint-12 */
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+.markdown-section p:first-child {
+  margin-top: 0 !important;
+}
+
+/* Links with underline decoration */
+.markdown-section a {
+  color: var(--fil-text-link) !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(167, 193, 239, 0.4) !important; /* primary-11 at 40% */
+  font-weight: inherit !important;
+}
+
+.markdown-section a:hover {
+  text-decoration: underline !important;
+}
+
+/* Override inline color:blue styles with Tailwind-style blue */
+[style*="color:blue"],
+[style*="color: blue"] {
+  color: #3b82f6 !important;
+  font-weight: 600 !important;
+  background: transparent !important;
+}
+
+.markdown-section strong {
+  color: var(--fil-text) !important;
+  font-weight: 600 !important;
+}
+
+/* Lists */
+.markdown-section ul,
+.markdown-section ol {
+  margin: 16px 0 !important;
+  padding-left: 24px !important;
+}
+
+.markdown-section li {
+  margin: 8px 0 !important;
+  font-size: 16px !important;
+  line-height: 1.625 !important;                  /* leading-relaxed */
+  color: rgb(254, 255, 255) !important;           /* tint-12 */
+}
+
+.markdown-section li::marker {
+  color: rgb(138, 145, 156) !important;           /* tint-10 */
+}
+
+/* Code - Inline (scalar-micro: 12px) - GitBook uses smaller inline code */
+.markdown-section code {
+  background: var(--fil-bg-elevated) !important;
+  padding: 2px 6px !important;
+  border-radius: var(--fil-radius-sm) !important;
+  font-family: var(--fil-font-mono) !important;
+  font-size: 0.85em !important;                   /* relative to parent, ~13-14px */
+  font-weight: var(--fil-font-normal) !important; /* 400 */
+  color: var(--fil-text) !important;
+  border: 1px solid var(--fil-border-subtle) !important;
+}
+
+/* Code - Blocks */
+.markdown-section pre {
+  background: var(--fil-bg-code) !important;
+  border: 1px solid var(--fil-border-subtle) !important;
+  border-radius: var(--fil-radius-lg) !important;
+  padding: 16px !important;
+  margin: 24px 0 !important;
+  overflow-x: auto !important;
+}
+
+.markdown-section pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  /* Let syntax highlighting determine text color */
+  color: inherit;
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+}
+
+/* Tables */
+.markdown-section table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+  margin: 24px 0 !important;
+  font-size: 14px !important;
+  border-radius: var(--fil-radius) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--fil-border-subtle) !important;
+  background: var(--fil-bg) !important;
+}
+
+.markdown-section th,
+.markdown-section td {
+  border: none !important;
+  border-bottom: 1px solid var(--fil-border-subtle) !important;
+  padding: 12px 16px !important;
+  text-align: left !important;
+}
+
+.markdown-section tr:last-child td {
+  border-bottom: none !important;
+}
+
+.markdown-section th {
+  background: var(--fil-bg-elevated) !important;
+  color: var(--fil-text) !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+  border-bottom: 1px solid var(--fil-border) !important;
+}
+
+.markdown-section tr {
+  background-color: transparent !important;
+  border-top: none !important;
+}
+
+.markdown-section tr:nth-child(2n) {
+  background-color: transparent !important;
+}
+
+.markdown-section td {
+  color: var(--fil-text-secondary) !important;
+  background: transparent !important;
+}
+
+.markdown-section tbody tr:hover {
+  background: var(--fil-bg-hover) !important;
+}
+
+.markdown-section td code {
+  background: var(--fil-bg-code) !important;
+  padding: 2px 6px !important;
+  border-radius: var(--fil-radius-sm) !important;
+  font-size: 13px !important;
+  color: var(--fil-text) !important;
+}
+
+/* Blockquotes */
+.markdown-section blockquote {
+  background: var(--fil-bg-elevated) !important;
+  border-left: 3px solid var(--fil-primary) !important;
+  margin: 24px 0 !important;
+  padding: 12px 16px !important;
+  border-radius: 0 var(--fil-radius) var(--fil-radius) 0 !important;
+  color: var(--fil-text-secondary) !important;
+}
+
+.markdown-section blockquote p {
+  margin: 8px 0 !important;
+}
+
+.markdown-section blockquote p:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-section blockquote p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Horizontal rule */
+.markdown-section hr {
+  border: none !important;
+  border-top: 1px solid var(--fil-border) !important;
+  margin: 48px 0 !important;
+}
+
+/* Images */
+.markdown-section img {
+  max-width: 100% !important;
+  border-radius: var(--fil-radius) !important;
+  margin: 24px 0 !important;
+}
+
+/* Inline images - GitBook data-size="line" */
+.markdown-section img[data-size="line"],
+.markdown-section h1 img,
+.markdown-section h2 img,
+.markdown-section h3 img,
+.markdown-section h4 img {
+  display: inline !important;
+  max-height: 1em !important;                     /* Match line height */
+  height: 1em !important;
+  width: auto !important;
+  margin: 0 !important;
+  margin-right: 0.35em !important;                /* Space between icon and text */
+  vertical-align: middle !important;
+  border-radius: 0 !important;
+}
+
+/* ============================================
+   Navigation (Bottom)
+   ============================================ */
+.navigation {
+  display: none !important;
+}
+
+.navigation-next,
+.navigation-prev {
+  display: none !important;
+}
+
+.page-inner .navigation-bottom {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  margin-top: 48px !important;
+  padding-top: 24px !important;
+  border-top: 1px solid var(--fil-border-subtle) !important;
+}
+
+.page-inner .fil-nav-bottom-link {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 16px !important;
+  border: 1px solid var(--fil-border-subtle) !important;
+  border-radius: var(--fil-radius-lg) !important;
+  text-decoration: none !important;
+  max-width: 45% !important;
+}
+
+.page-inner .fil-nav-bottom-link:hover {
+  border-color: var(--fil-primary) !important;
+  background: var(--fil-bg-hover) !important;
+}
+
+.page-inner .fil-nav-bottom-link.next {
+  margin-left: auto !important;
+  text-align: right !important;
+}
+
+.page-inner .fil-nav-bottom-label {
+  font-size: 12px !important;
+  color: var(--fil-text-muted) !important;
+  margin-bottom: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.page-inner .fil-nav-bottom-link.next .fil-nav-bottom-label {
+  justify-content: flex-end !important;
+}
+
+.page-inner .fil-nav-bottom-title {
+  color: var(--fil-text-link) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+.book-summary::-webkit-scrollbar {
+  width: 6px;
+}
+
+.book-summary::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.book-summary::-webkit-scrollbar-thumb {
+  background: var(--fil-border);
+  border-radius: 3px;
+}
+
+.book-summary::-webkit-scrollbar-thumb:hover {
+  background: var(--fil-text-muted);
+}
+
+.book-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.book-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.book-body::-webkit-scrollbar-thumb {
+  background: var(--fil-border);
+  border-radius: 4px;
+}
+
+.book-body::-webkit-scrollbar-thumb:hover {
+  background: var(--fil-text-muted);
+}
+
+/* ============================================
+   Tablet Typography (768px - 1023px) - GitBook @xs sizes
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* H1: text-2xl (24px) on tablet - text-3xl is 30px at @lg */
+  .markdown-section h1 {
+    font-size: 24px !important;
+  }
+
+  /* H2: text-2xl (24px) on tablet */
+  .markdown-section h2 {
+    font-size: 24px !important;
+  }
+
+  /* H3: text-xl (20px) on tablet */
+  .markdown-section h3 {
+    font-size: 20px !important;
+  }
+}
+
+/* ============================================
+   Mobile Typography (< 768px) - GitBook base sizes
+   ============================================ */
+@media (max-width: 767px) {
+  /* H1: text-2xl (24px) on mobile - minimum size */
+  .markdown-section h1 {
+    font-size: 24px !important;
+  }
+
+  /* H2: text-xl (20px) on mobile */
+  .markdown-section h2 {
+    font-size: 20px !important;
+  }
+
+  /* H3: text-lg (18px) on mobile */
+  .markdown-section h3 {
+    font-size: 18px !important;
+  }
+
+  .page-inner .navigation-bottom {
+    flex-direction: column !important;
+  }
+
+  .page-inner .fil-nav-bottom-link {
+    max-width: 100% !important;
+  }
+
+  .page-inner .fil-nav-bottom-link.next {
+    margin-left: 0 !important;
+    text-align: left !important;
+  }
+
+  .page-inner .fil-nav-bottom-link.next .fil-nav-bottom-label {
+    justify-content: flex-start !important;
+  }
+
+  /* Tables on mobile */
+  .markdown-section table {
+    font-size: 13px !important;
+  }
+
+  .markdown-section th,
+  .markdown-section td {
+    padding: 10px 12px !important;
+  }
+
+  .markdown-section th {
+    font-size: 12px !important;
+  }
+
+  .markdown-section td code {
+    font-size: 12px !important;
+  }
+}
+
+/* ============================================
+   Print
+   ============================================ */
+@media print {
+  .book-summary,
+  .book-header,
+  .navigation,
+  .navigation-bottom,
+  .fil-navbar,
+  .fil-breadcrumb,
+  .fil-toc {
+    display: none !important;
+  }
+
+  .book-body {
+    margin-left: 0 !important;
+    padding-top: 0 !important;
+    background: white !important;
+  }
+
+  .markdown-section {
+    background: white !important;
+    color: #1a1a1a !important;
+  }
+
+  .markdown-section h1,
+  .markdown-section h2,
+  .markdown-section h3,
+  .markdown-section h4 {
+    color: #000 !important;
+  }
+
+  .markdown-section a {
+    color: #1a1a1a !important;
+    text-decoration: underline !important;
+  }
+
+  .markdown-section code {
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+  }
+
+  .markdown-section pre {
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+  }
+}
