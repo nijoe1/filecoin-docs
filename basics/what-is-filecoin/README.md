@@ -5,7 +5,7 @@ description: >-
 
 <meta name="description" content="Introduction to Filecoin." />
 
-# Introduction to Filecoin
+## Introduction to Filecoin
 
 Filecoin is a peer-to-peer network that enables reliable, decentralized file storage through built-in economic incentives and cryptographic proofs. Clients, or users, pay any number of storage providers, or data centers, to store the client's data --storage providers then provide cryptographic proofs daily as evidence to the clients that the data is still at the data center.  Storage providers lock a certain amount of Filecoin as collateral --should they repeatedly fail to provide a proof, their collateral gets burned, serving as a strong deterrent from the data center losing the data. 
 
