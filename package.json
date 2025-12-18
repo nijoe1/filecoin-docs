@@ -5,7 +5,7 @@
   "main": "update-versions.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "setup": "npm run build:plugin && npm install && gitbook-cli setup",
+    "setup": "npm install && gitbook-cli setup",
     "build": "gitbook-cli build",
     "dev": "gitbook-cli serve",
     "preview": "gitbook-cli preview",
@@ -13,8 +13,8 @@
     "dev:verbose": "gitbook-cli serve --verbose",
     "preview:verbose": "gitbook-cli preview --verbose",
     "stop": "gitbook-cli stop",
-    "build:plugin": "cd gitbook-plugins && npm install && npm run build",
-    "clean": "rm -rf _book _book_temp node_modules package-lock.json gitbook-plugins/node_modules gitbook-plugins/dist gitbook-plugins/package-lock.json .gitbook/cli/"
+    "help": "gitbook-cli help",
+    "clean": "rm -rf _book _book_temp node_modules package-lock.json"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/filecoin-project/filecoin-docs#readme",
   "devDependencies": {
-    "@types/node": "^24.10.1",
-    "gitbook-plugin-local": "file:./gitbook-plugins"
+    "gitbook-plugin-filecoin": "^1.0.5"
   }
 }
