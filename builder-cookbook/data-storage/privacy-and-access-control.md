@@ -10,12 +10,12 @@ description: >-
 
 Ensuring your dataset is encrypted is critical to good privacy hygiene when storing files on decentralized networks, including Filecoin and IPFS.  Uploading an unencrypted file would allow the storage provider to read the files you store with them, and allow them to send copies to unknown third parties.&#x20;
 
-The Lighthouse team developed the Kavach encryption SDK, which is included in the Lighthouse SDK by default, to enable encryption of files pinned to IPFS or stored on Filecoin.  The below examples are pulled directly from their documentation, you can read more [here](https://docs.lighthouse.storage/lighthouse-1/how-to/upload-encrypted-data).
+The Lighthouse team developed the Kavach encryption SDK, which is included in the Lighthouse SDK by default, to enable encryption of files pinned to IPFS or stored on Filecoin.  The below examples are pulled directly from their documentation, you can read more [here](https://docs.lighthouse.storage/how-to/upload-encrypted-data).
 
 **Ingredients:**
 
 * [Kavach encryption SDK](https://github.com/lighthouse-web3/encryption-sdk)
-* [Access control to a dataset](https://docs.lighthouse.storage/lighthouse-1/how-to/encryption-features/access-control-conditions)
+* [Access control to a dataset](https://docs.lighthouse.storage/how-to/encryption-features/access-control-conditions)
 
 **Instructions:**&#x20;
 
@@ -294,7 +294,7 @@ Lighthouse also provides a number of methods to gate access a given data set.  I
 }
 ```
 
-To review the Lighthouse documentation in its entirety, please visit: [https://docs.lighthouse.storage/lighthouse-1/](https://docs.lighthouse.storage/lighthouse-1/)&#x20;
+To review the Lighthouse documentation in its entirety, please visit: [https://docs.lighthouse.storage](https://docs.lighthouse.storage/)&#x20;
 
 
 

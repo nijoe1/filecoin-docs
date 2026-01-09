@@ -15,7 +15,7 @@ Website [beryx.zondax.ch](https://beryx.zondax.ch/)
 
 ### Filfox
 
-Website: [filfox.info](https://filfox.info)
+Website: [filfox.info](https://filfox.info/en/)
 
 ### Filscan
 

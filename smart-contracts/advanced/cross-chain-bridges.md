@@ -60,7 +60,7 @@ Celar’s CBridge supports both Filecoin Mainnet and Calibration testnet.
 ### **Further Celer resources**
 
 * [cBridge docs](https://cbridge-docs.celer.network/)
-* [Celer IM Docs](https://im-docs.celer.network/developer/celer-im-overview)
+* [Celer IM Docs](https://im-docs.celer.network/)
 
 
 

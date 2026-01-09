@@ -34,7 +34,7 @@ The proof consists of two elements:
 1. An inclusion proof of a sub-tree, which contains the size and position of the sub-piece data in the larger aggregated data piece, corresponding to the tree of the aggregator's committed larger aggregated data piece.
 2. An inclusion proof of the double leaf data segment descriptor, which describes the sub-piece data within the larger data segment index, which is contained at the end of a deal, describing all the data segments contained within that deal.
 
-Lighthouse.storage is the first aggregator platform to enable PoDSI. You can view the tutorial in their docs [here](https://docs.lighthouse.storage/lighthouse-1/filecoin-virtual-machine/section-a#step-3-understanding-podsi-getting-the-podsi-for-your-file).
+Lighthouse.storage is the first aggregator platform to enable PoDSI. You can view the tutorial in their docs [here](https://docs.lighthouse.storage).
 
 Read more about the technical details of PoDSI [here](https://github.com/filecoin-project/FIPs/blob/master/FRCs/frc-0058.md#proof-of-data-segment-inclusion).
 
@@ -47,10 +47,10 @@ To request for aggregation and PoDSI off-chain, developers interact with an aggr
 3. Simultaneously, the aggregator aggregates indexed data segments (based on specs [here](https://github.com/filecoin-project/FIPs/discussions/512)). It runs the proofing library and generates PoDSI proofs for each sub-piece pCID, storing them in an off-chain database.
 4. The aggregator uses programmatic deal-making or [manual deal-making](https://lotus.filecoin.io/tutorials/lotus/build-with-lotus-api/) to make storage deals with storage providers for the aggregated larger CAR file.
 5. Storage Providers download the aggregated CAR file and publish storage deals.
-6. Clients can query a proofing endpoint provided by the aggregator (example [here](https://docs.lighthouse.storage/lighthouse-1/filecoin-virtual-machine/section-a), which will look up the sub-piece CID (pCID) in the database and return the PoDSI proof, aggregated CID, and associated deal ID.
+6. Clients can query a proofing endpoint provided by the aggregator, which will look up the sub-piece CID (pCID) in the database and return the PoDSI proof, aggregated CID, and associated deal ID.
 7. Clients can use the sub-piece pCID for on-chain verification with the aggregation smart contract, which will verify the Merkle proof to ensure the sub-piece pCID (CommPc) matches the piece CID (CommPa) of the associated deal ID.
 
-[Lighthouse.storage](https://www.lighthouse.storage/) is the first aggregator platform available. You can find their docs on how to utilize their SDK for the above process [here](https://docs.lighthouse.storage/lighthouse-1/filecoin-virtual-machine/section-a#step-3-understanding-podsi-getting-the-podsi-for-your-file).
+[Lighthouse.storage](https://www.lighthouse.storage/) is the first aggregator platform available. You can find their docs on how to utilize their SDK for the above process [here](https://docs.lighthouse.storage).
 
 <figure><img src="https://github.com/filecoin-project/filecoin-docs/assets/113331491/47691259-5665-43c7-bea6-79ed2b453f86" alt=""><figcaption><p>Requesting for aggregation of data to store, via an off-chain platform</p></figcaption></figure>
 

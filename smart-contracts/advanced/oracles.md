@@ -34,7 +34,7 @@ Pyth’s smart contracts are live on the Filecoin Mainnet and Calibration testne
 | Name                                                                                                              | Address                                      | Mainnet | Calibration |
 | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ------- | ----------- |
 | [Pyth - Mainnet](https://filecoin.blockscout.com/address/0xA2aa501b19aff244D90cc15a4Cf739D2725B5729?tab=contract) | `0xA2aa501b19aff244D90cc15a4Cf739D2725B5729` | ✔️      |             |
-| [Pyth - Calibration](http://47.109.105.51/en/address/0xA2aa501b19aff244D90cc15a4Cf739D2725B5729)                  | `0xA2aa501b19aff244D90cc15a4Cf739D2725B5729` |         | ✔️          |
+| [Pyth - Calibration](https://calibration.filfox.info/en/address/0xA2aa501b19aff244D90cc15a4Cf739D2725B5729)                  | `0xA2aa501b19aff244D90cc15a4Cf739D2725B5729` |         | ✔️          |
 
 **Pyth x Filecoin Price Feed IDs**
 
@@ -44,7 +44,7 @@ Price Feed IDs for FIL are also available on various chains. These can be found 
 
 * [Pyth docs](https://docs.pyth.network/)
 * [Pyth - Best Practices](https://docs.pyth.network/price-feeds/best-practices)
-* [Pyth Benchmarks - historical price feeds](https://docs.pyth.network/benchmarks)
+* [Pyth Benchmarks - historical price feeds](https://docs.pyth.network/metrics/)
 
 ### [Tellor](https://tellor.io/)
 
