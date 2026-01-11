@@ -35,43 +35,28 @@ Want to help out? Pull requests (PRs) are always welcome! If you want to help ou
 
 ### Local Development
 
-You can build and preview the documentation locally using the custom CLI wrapper. This setup automatically manages the legacy Node.js v10 environment required by GitBook.
-
-#### Prerequisites
-
-- [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager)
-
-  **macOS/Linux:**
-
-  ```bash
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-  ```
-
-  **Windows:** Use [nvm-windows](https://github.com/coreybutler/nvm-windows) or WSL
+You can build and preview the documentation locally.
 
 #### Quick Start
 
 1. **Setup**: Installs dependencies and prepares the environment.
 
    ```bash
-   npm run setup
+   npm install
    ```
 
 2. **Develop**: Builds and serves the site with live reload.
    ```bash
-   npm run dev
+   npm run serve
    ```
 
 #### Commands
 
 | Command           | Description                                                                                           |
 | ----------------- | ----------------------------------------------------------------------------------------------------- |
-| `npm run setup`   | Installs dependencies and configures the legacy GitBook environment (runs automatically on first use) |
-| `npm run dev`     | Builds and serves the documentation with live reload (default port: 4003)                             |
+| `npm run serve`     | Builds and serves the documentation with live reload (default port: 4000)                             |
 | `npm run build`   | Builds the static site to the `_book/` directory                                                      |
 | `npm run preview` | Serves the existing `_book/` directory without rebuilding                                             |
-| `npm run stop`    | Stops any running GitBook server instances                                                            |
-| `npm run clean`   | Removes build artifacts and dependencies                                                              |
 
 
 ### Link checking

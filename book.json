@@ -1,7 +1,6 @@
 {
-  "gitbook": "3.2.3",
-  "plugins": ["filecoin"],
   "structure": {
     "readme": "WELCOME.md"
-  }
+  },
+  "plugins": ["filecoin", "-highlight"]
 }

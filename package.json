@@ -4,17 +4,11 @@
   "description": "<div align=center>",
   "main": "update-versions.js",
   "scripts": {
+    "serve": "honkit serve",
+    "build": "honkit build",
+    "preview": "npx serve _book -p 4000",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "setup": "npm install && gitbook-cli setup",
-    "build": "gitbook-cli build",
-    "dev": "gitbook-cli serve",
-    "preview": "gitbook-cli preview",
-    "build:verbose": "gitbook-cli build --verbose",
-    "dev:verbose": "gitbook-cli serve --verbose",
-    "preview:verbose": "gitbook-cli preview --verbose",
-    "stop": "gitbook-cli stop",
-    "help": "gitbook-cli help",
-    "clean": "rm -rf _book _book_temp node_modules package-lock.json"
+    "update-versions": "node update-versions.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +22,7 @@
   },
   "homepage": "https://github.com/filecoin-project/filecoin-docs#readme",
   "devDependencies": {
-    "gitbook-plugin-filecoin": "^1.0.5"
+    "gitbook-plugin-filecoin": "^1.0.5",
+    "honkit": "^6.1.4"
   }
 }
