@@ -92,7 +92,7 @@ It is highly recommended for all FVM smart contracts to complete the verificatio
 
 Developers can easily do so through the following block explorers:
 
-* [Filfox contract verifier](https://filfox.info/en/contract)
+* [Filfox contract verifier](https://filfox.info/en/contract/)
 * [Beryx contract verifier](https://beryx.zondax.ch/contract\_verifier)
 
 You can find this tutorial in the [FEVM ERC-20 Quickstart](../fundamentals/erc-20-quickstart.md).

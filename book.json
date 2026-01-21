@@ -1,0 +1,6 @@
+{
+  "structure": {
+    "readme": "WELCOME.md"
+  },
+  "plugins": ["filecoin", "-highlight"]
+}

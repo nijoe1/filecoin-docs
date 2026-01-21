@@ -11,6 +11,7 @@
 
 - [About this repo](#about-this-repo)
 - [Contributing](#contributing)
+  - [Local Development](#local-development)
   - [Link checking](#link-checking)
 - [Issues](#issues)
   - [Backlog](#backlog)
@@ -31,6 +32,32 @@ PRs also generate preview links so one can preview the site before merging.  Per
 ## Contributing
 
 Want to help out? Pull requests (PRs) are always welcome! If you want to help out but aren't sure where to start, check out the [issues board](https://github.com/filecoin-project/filecoin-docs/issues).
+
+### Local Development
+
+You can build and preview the documentation locally.
+
+#### Quick Start
+
+1. **Setup**: Installs dependencies and prepares the environment.
+
+   ```bash
+   npm install
+   ```
+
+2. **Develop**: Builds and serves the site with live reload.
+   ```bash
+   npm run serve
+   ```
+
+#### Commands
+
+| Command           | Description                                                                                           |
+| ----------------- | ----------------------------------------------------------------------------------------------------- |
+| `npm run serve`     | Builds and serves the documentation with live reload (default port: 4000)                             |
+| `npm run build`   | Builds the static site to the `_book/` directory                                                      |
+| `npm run preview` | Serves the existing `_book/` directory without rebuilding                                             |
+
 
 ### Link checking
 

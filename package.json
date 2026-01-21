@@ -4,6 +4,9 @@
   "description": "<div align=center>",
   "main": "update-versions.js",
   "scripts": {
+    "serve": "honkit serve",
+    "build": "honkit build",
+    "preview": "npx serve _book -p 4000",
     "test": "echo \"Error: no test specified\" && exit 1",
     "update-versions": "node update-versions.js"
   },
@@ -17,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/filecoin-project/filecoin-docs/issues"
   },
-  "homepage": "https://github.com/filecoin-project/filecoin-docs#readme"
+  "homepage": "https://github.com/filecoin-project/filecoin-docs#readme",
+  "devDependencies": {
+    "gitbook-plugin-filecoin": "^1.0.5",
+    "honkit": "^6.1.4"
+  }
 }

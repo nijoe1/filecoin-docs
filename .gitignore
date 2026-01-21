@@ -10,3 +10,8 @@ Thumbs.db
 :Zone.Identifier
 **/:Zone.Identifier
 lychee*
+_book/
+_book_temp/
+node_modules/
+package-lock.json
+.gitbook/cli/

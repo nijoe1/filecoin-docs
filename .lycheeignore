@@ -1,1 +1,3 @@
-
+# Filfox.info blocks automated requests (returns 500/503)
+# but links work fine in browsers
+https://filfox.info

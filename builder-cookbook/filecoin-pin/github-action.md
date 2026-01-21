@@ -14,6 +14,6 @@ Below is also a video walkthrough of the example GitHub Action in use!
 
 {% embed url="https://www.youtube.com/embed/_2ZsMYXfgwI?si=VYkZzA1XhJh3wvgw" %}
 
-Note: there is more work coming soon to add "filecoin-pin functionality" directly to the robust [ipshipyard/ipfs-deploy-action](https://github.com/ipshipyard/ipfs-deploy-action) ([tracking issue](https://github.com/ipfs/ipfs-deploy-action/issues/39)).
+Note: there is more work coming soon to add "filecoin-pin functionality" directly to the robust [ipshipyard/ipfs-deploy-action](https://github.com/ipshipyard/ipfs-deploy-action) ([tracking issue](https://github.com/ipshipyard/ipfs-deploy-action/issues/39)).
 
 
